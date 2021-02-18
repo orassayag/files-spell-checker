@@ -1,0 +1,104 @@
+Complete / canceled tasks:
+==========================
+-Fix spell mistakes in all txt files. *
+-Remove all unused files, functions, and variables. *
+-Remove all debugger. *
+-Do all the ToDo points. *
+-Rewrite error numbers. *
+-Format all files. *
+-Verify all works one last time. *
+-Change the scan path in settings to "C:\\". *
+-Upload to GitHub. *
+-Move all complete tasks from here to complete_tasks.txt. *
+-Re-check all imports in the entire project (check for duplicate imports paths). *
+-Sort alphabetically all imports: external packages, settings, (containers, components, store, assert) data, models, enums, services, utils. *
+-Sort alphabetically by https://alphabetizer.flap.tv/. *
+-Clear empty spaces with ^\s*$. *
+-Replace all 'let' to 'const' and where no bugs - change it. *
+-Add 'Misc.' section to gitignore and npmignore files (include tasks TXT files + backups directory). *
+-Add script name to tests and add validation for empty script name in initiate.service.js. *
+-Change the logic of ignore words today to add it on the initiate process of nspell service. *
+-Test it works. *
+-Clear all comments again. *
+-Remove the console.log(e) from handleError function. *
+-Make sure spaces in all files between bottom, need to fix cases like this: *
+export { *
+} *
+} *
+module.exports *
+} *
+export default *
+-Insert all parameters into settings.js file. *
+-Update packages. *
+-Fix description in package.json + README.MD + re-create package.json-lock file. *
+-Update the INSTRUCTIONS.md. *
+-Give credit on README.MD to cspell on: https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries *
+-Clear all the comments. *
+-Make sure all comments ends with . *
+-Add "dictionaries" to all eslint, eslintignore, .gitignore, .npmignore, .vscode/settings.js. *
+-Add misc\\backups to ignorePaths. *
+-Add internet connection validation. *
+-Merge scanContent.service.js and scanName.service.js into single file, since it's using most of the same code - run with the same "run" function. *
+-Add on CONTENT the skip counter. *
+-Add index.js to "configurations" direcotry and replace in all places. *
+-Add ignore words in file names only in CONTENT method - canceled. *
+-The content scan script: *
+========================= *
+-Move to nspell npm package. *
+-Rebuild the logic the spellCheck.service + add nspell service to build there *
+ all the logic of the dictionaries, and provide the nspell. *
+-Build the logic to download all the cpell dictionaries by given links to txt files. *
+-Initiate all the dictionaries after downloading them. *
+-Get all the files inside dictionaries directory and initiate them to the nspell. *
+-If no files inside don't initiate anything. *
+-Each time it runs, need to initiate the TXT files. *
+-If dictionaries directory not exists, download all the files to TXT files to directory and initiate them. *
+-If dictionaries directory already exists don't need to download the files again, just initiate the files. *
+-Test again the content for misspells. *
+-Log all the misspells into the dist directory to the file content_#DateTime#. *
+https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries *
+-Get the file types in the array from settings.js. *
+-Change the logic to the following: *
+-Check for more than 1 and exists. *
+-Trim spaces. *
+-Clear all numbers and special symboles (except '`). *
+-Check again for more than 1 and exists. *
+-Then get suggestions. *
+-Verify all works af before. *
+-Add to the console status line the path to scan. *
+5. Limit the count of words for each file name/content. *
+-Build a scan file on tests directory, that will both display the result for the file name and the content - canceled. *
+-The name scan script: *
+====================== *
+-Log all the misspells into the dist directory to the file name_#DateTime#. *
+-If unable to open/read the file, catch the exception and continue to the next file. *
+-Both: *
+-Clear special symboles (not include .,`) and all none-English characters. *
+-Ignore words that contains only numbers (at least 2 English characters in a row). *
+-The console log status will look like this: *
+===[SETTINGS] Time: 00.05:16:58 [-] | Method: NAME | Ignore Words: 45 | Ignore Paths: 10=== *
+===[GENERAL] Current: 104,342,450/454,334,500 (31.60%) | Status: SCAN/PAUSE/FINISH=== *
+===[ITEMS] Total: ✅ 1,412 | Misspell: ❌ 23 | Skip: 143,434 | Error: 1=== *
+===[WORDS] Total: 473,345,994 | Misspell: 1,348 | Ignore: 3=== *
+===[NAME] complete_tasks.txt=== (cut the path if too long) *
+===[PATH] C:\Or\Web\sender\sender\misc\documents\=== (cut the path if too long) *
+6. Delay in milliseconds between each file scan. *
+-The log structure will be identical to all: *
+C:\Or\Web\sender\sender\misc\documents\complete_tasks.txt *
+task => task, tak, te. *
+task => task, tak, te. *
+================================ *
+-Limit each log file to a number of misspells (5000) - From settings.js. *
+7. Limit the number of charecters of path in console status log. *
+-Ignore words that contains 1 characters. *
+-Build the backup logic. *
+-Build the function that check a words and return the result. *
+-Build the function of spliting words file names. *
+-This might help: https://stackoverflow.com/questions/37523267/javascript-regex-how-to-single-out-english-words-and-non-english-characters-and *
+-There will be general settings.js for both scripts: *
+1. Scan the files according to a given path. *
+2. Ignore words list. *
+3. Ignore paths list. *
+4. Limit files count to check. *
+-Test the "typo-js" npm package. *
+-Add options to limit the number of files to scan - canceled. *
