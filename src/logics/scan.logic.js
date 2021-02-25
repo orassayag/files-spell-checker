@@ -14,7 +14,7 @@ class ScanLogic {
         await this.confirm();
         // Validate general settings.
         await this.validateGeneralSettings();
-        // Initiate all the settings, configurations, services, ect...
+        // Initiate all the settings, configurations, services, etc...
         await this.initiate();
         // Start the scanning process.
         await this.startSession();
@@ -57,7 +57,7 @@ class ScanLogic {
     }
 
     async sleep() {
-        await globalUtils.sleep(countLimitService.countLimitData.millisecondsBetweenItemsDelayCount);
+        await globalUtils.sleep(countLimitService.countLimitData.millisecondsEndDelayCount);
     }
 
     // Let the user confirm all the IMPORTANT settings before the process start.

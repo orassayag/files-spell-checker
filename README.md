@@ -1,9 +1,6 @@
-# Server
+# Files Spell Checker
 
-Start to be built in February 2020. The goal of the send script if to scan file names, directory paths,
-and file contents to alert for spell mistakes within the names via log. Thanks to cspell for the dictionaries:
-https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries
-
+Start to be built in February 2020. A Node.js application to scan file names, directory paths, and file contents to alert for spell mistakes within the names via log. Thanks to cspell for the dictionaries: https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries
 
 ## Getting Started
 
@@ -11,7 +8,7 @@ Clone the application to your computer.
 Steps to view the solution:
 1. Open server application on IDE (I use VSCode).
 2. Terminal: npm i
-3. Terminal: npm start
+3. In terminal: npm start
 
 READ THE FOLLOWING SETTINGS BEFORE YOU BEGIN:
 

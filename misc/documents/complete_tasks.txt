@@ -1,5 +1,29 @@
 Complete / canceled tasks:
 ==========================
+-Update packages. *
+-Check the order of the parameters in the initiate.service.js (Titles order identical to settings.js order). *
+-Add script name to tests and add validation for empty script name in initiate.service.js (copy from sender project). *
+-Go over timeUtils and make sure all local "this.getDay" are being used, and not "date.getDate()" for example. *
+-Fix comment in settings.js 'interval to run to calculate' => 'interval to calculate'. *
+-Add index.js to "configurations" direcotry and replace in all places. *
+-Fix comment:         // Get the backup title from the console.s *
+-Fix all README.me + package.json from 'create-react-up' to 'create-react-app'. *
+-Change all ect => etc - In all projects. *
+-Verify package.json project name. *
+-Change all README.md files to the title of the project as first line (Only one #). *
+-Change from 'Start to be built' to 'Built in', and remove space lines, and the "-Goal:", *
+and remove the 'This project was bootstrapped with [Create React App] *
+(https://github.com/facebook/create-react-app).' line under to the description *
+with line space,  all fixes in README.md. *
+-Fix the exit bug on the console, it on status SCAN and not 100% (try to scan cv-spider-v5-console-final project). *
+-Re-format all error numbers + last_index.txt file. *
+-Clear all comments. *
+-Fix all misspells in all TXT files. *
+-Format all documents. *
+-Move all complete tasks to complete_tasks.txt. *
+-Verify all works good. *
+-Upload to GitHub. *
+-Backup iOmega. *
 -Fix spell mistakes in all txt files. *
 -Remove all unused files, functions, and variables. *
 -Remove all debugger. *
