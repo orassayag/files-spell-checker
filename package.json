@@ -2,7 +2,7 @@
   "name": "files-spell-checker",
   "version": "1.0.0",
   "private": true,
-  "description": "The goal of the send script if to scan file names, directory paths, and file contents to alert for spell mistakes within the names via log.",
+  "description": "A Node.js application to scan file names, directory paths, and file contents to alert for spell mistakes within the names via log.",
   "keywords": [
     "scan",
     "paths",
