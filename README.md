@@ -1,6 +1,6 @@
 # Files Spell Checker
 
-Start to be built in February 2020. A Node.js application to scan file names, directory paths, and file contents to alert for spell mistakes within the names via log. Thanks to cspell for the dictionaries: https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries
+Built in February 2020. A Node.js application to scan file names, directory paths, and file contents to alert for spell mistakes within the names via log. Thanks to cspell for the dictionaries: https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries
 
 ## Getting Started
 
