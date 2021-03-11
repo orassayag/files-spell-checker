@@ -19,34 +19,34 @@ class LogService {
 		this.frames = ['-', '\\', '|', '/'];
 		this.i = 0;
 		this.emptyValue = '##';
-		this.logSeperator = '==========';
+		this.logSeparator = '==========';
 		this.directoryIndex = null;
 		this.fileIndex = null;
 		this.logCounts = 0;
 	}
 
-	async initiate(settings) {
+	initiate(settings) {
 		this.logData = new LogData(settings);
-		await this.initiateDirectories();
+		this.initiateDirectories();
 	}
 
-	async initiateDirectories() {
+	initiateDirectories() {
 		// ===PATH=== //
 		if (!this.logData.isLogResults) {
 			return;
 		}
 		this.baseSessionPath = pathService.pathData.distPath;
-		await fileUtils.createDirectory(this.baseSessionPath);
+		fileUtils.createDirectory(this.baseSessionPath);
 		this.getNextDirectoryIndex();
-		await this.createSessionDirectory();
+		this.createSessionDirectory();
 	}
 
-	async createSessionDirectory() {
+	createSessionDirectory() {
 		this.sessionDirectoryPath = pathUtils.getJoinPath({
 			targetPath: this.baseSessionPath,
 			targetName: `${this.directoryIndex}_${applicationService.applicationData.logDateTime}`
 		});
-		await fileUtils.createDirectory(this.sessionDirectoryPath);
+		fileUtils.createDirectory(this.sessionDirectoryPath);
 		this.updateFileName();
 	}
 
@@ -155,7 +155,7 @@ class LogService {
 			}
 			lines.push(`${fix} => ${suggestions.join(', ')}`);
 		}
-		lines.push(`${this.logSeperator}\n`);
+		lines.push(`${this.logSeparator}\n`);
 		return lines.join('\n');
 	}
 

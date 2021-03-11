@@ -1,6 +1,6 @@
 /* cSpell:disable */
 // It's highly not recommended to change the system paths.
-// This paths are included case, so if the path, for example, contains the word
+// This paths are 'included' case, so if the path, for example, contains the word
 // 'backups', and the word 'backups' is in this array, it will be ignored.
 const ignorePaths = [
     '\\.git',
@@ -14,7 +14,7 @@ const ignorePaths = [
     'C:\\Program Files',
     'C:\\Program Files (x86)',
     'C:\\ProgramData',
-    'C:\\Wsers',
+    'C:\\Users',
     'C:\\Windows'
 ];
 

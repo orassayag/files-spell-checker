@@ -18,6 +18,9 @@ const ScriptType = enumUtils.createEnum([
 
 const Status = enumUtils.createEnum([
     ['INITIATE', 'INITIATE'],
+    ['VALIDATE', 'VALIDATE'],
+    ['DOWNLOAD', 'DOWNLOAD'],
+    ['IMPLEMENT', 'IMPLEMENT'],
     ['SCAN', 'SCAN'],
     ['LIMIT_EXCEEDED', 'LIMIT_EXCEEDED'],
     ['ABORT_BY_THE_USER', 'ABORT BY THE USER'],

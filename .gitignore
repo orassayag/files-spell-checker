@@ -20,6 +20,11 @@ dist/
 /dist
 dist
 
+# Sources.
+sources/
+/sources
+sources
+
 # Dictionaries.
 dictionaries/
 /dictionaries

@@ -21,18 +21,18 @@ class ScanLogic {
     }
 
     async initiate() {
-        logUtils.logMagentaStatus('INITIATE THE SERVICES');
+        this.updateStatus('INITIATE THE SERVICES', Status.INITIATE);
         await nSpellService.initiate(settings);
-        countLimitService.initiate(settings);
         itemService.initiate();
         scanService.initiate();
         pathService.initiate(settings);
-        await logService.initiate(settings);
+        logService.initiate(settings);
     }
 
     async validateGeneralSettings() {
-        logUtils.logMagentaStatus('VALIDATE GENERAL SETTINGS');
-        // Validate internet connection works.
+        this.updateStatus('VALIDATE GENERAL SETTINGS', Status.VALIDATE);
+        // Validate that the internet connection works.
+        countLimitService.initiate(settings);
         applicationService.initiate(settings, Status.INITIATE);
         await validationService.validateInternetConnection();
     }
@@ -60,10 +60,17 @@ class ScanLogic {
         await globalUtils.sleep(countLimitService.countLimitData.millisecondsEndDelayCount);
     }
 
-    // Let the user confirm all the IMPORTANT settings before the process start.
+    // Let the user confirm all the IMPORTANT settings before the process starts.
     async confirm() {
         if (!await confirmationService.confirm(settings)) {
             await this.exit(Status.ABORT_BY_THE_USER, Color.RED);
+        }
+    }
+
+    updateStatus(text, status) {
+        logUtils.logMagentaStatus(text);
+        if (applicationService.applicationData) {
+            applicationService.applicationData.status = status;
         }
     }
 

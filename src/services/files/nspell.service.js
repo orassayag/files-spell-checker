@@ -1,6 +1,8 @@
 const dictionary = require('dictionary-en');
 const nspell = require('nspell');
+const { Status } = require('../../core/enums');
 const { baseURL, dictionariesURLs, ignoreWords } = require('../../configurations');
+const applicationService = require('./application.service');
 const { fileUtils, httpsUtils, logUtils, pathUtils, validationUtils } = require('../../utils');
 
 class NSpellService {
@@ -10,11 +12,11 @@ class NSpellService {
     }
 
     async initiate(settings) {
-        logUtils.logMagentaStatus('DOWNLOAD DICTIONARIES');
+        this.updateStatus('DOWNLOAD DICTIONARIES', Status.DOWNLOAD);
         for (let i = 0; i < dictionariesURLs.length; i++) {
             await this.downloadFile(dictionariesURLs[i], settings.DICTIONARIES_PATH);
         }
-        logUtils.logMagentaStatus('IMPLEMENT DICTIONARIES');
+        this.updateStatus('IMPLEMENT DICTIONARIES', Status.IMPLEMENT);
         this.spell = await new Promise((resolve, reject) => {
             if (reject) { }
             dictionary(async (err, dict) => {
@@ -57,6 +59,13 @@ class NSpellService {
     async getDictionary(filePath) {
         const words = await fileUtils.read(filePath);
         return words.split('\n');
+    }
+
+    updateStatus(text, status) {
+        logUtils.logMagentaStatus(text);
+        if (applicationService.applicationData) {
+            applicationService.applicationData.status = status;
+        }
     }
 }
 
