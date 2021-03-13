@@ -52,7 +52,7 @@
     "byline": "^5.0.0",
     "cli-cursor": "^3.1.0",
     "dictionary-en": "^3.1.0",
-    "eslint": "^7.21.0",
+    "eslint": "^7.22.0",
     "fs-extra": "^9.1.0",
     "is-reachable": "^5.0.0",
     "nspell": "^2.1.5",
