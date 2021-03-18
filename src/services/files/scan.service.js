@@ -30,7 +30,7 @@ class ScanService {
         let isLimitExceeded = false;
         let items = await fileUtils.getFilesRecursive({
             directory: applicationService.applicationData.scanPath,
-            includeDirecotries: isName,
+            includeDirectories: isName,
             ignoreFiles: this.ignoreFiles,
             ignorePaths: this.ignorePaths
         });

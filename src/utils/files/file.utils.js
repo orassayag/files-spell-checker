@@ -56,13 +56,13 @@ class FileUtils {
     }
 
     async getFilesRecursive(data) {
-        const { directory, includeDirecotries, ignoreFiles, ignorePaths } = data;
+        const { directory, includeDirectories, ignoreFiles, ignorePaths } = data;
         if (ignorePaths.some(d => textUtils.toLowerCase(directory).includes(d))) {
             return [];
         }
         const dirents = await fs.readdir(directory, { withFileTypes: true });
         let files = [];
-        if (includeDirecotries) {
+        if (includeDirectories) {
             files.push(directory);
         }
         files = [...files, ...await Promise.all(dirents.map(dirent => {
@@ -70,7 +70,7 @@ class FileUtils {
             if (dirent.isDirectory()) {
                 return this.getFilesRecursive({
                     directory: result,
-                    includeDirecotries: includeDirecotries,
+                    includeDirectories: includeDirectories,
                     ignorePaths: ignorePaths,
                     ignoreFiles: ignoreFiles
                 });

@@ -1,18 +1,27 @@
 Complete / canceled tasks:
 ==========================
+-Fix all spell mistakes via Gmail. *
+-Format all files. *
+-Upload to GitHub. *
+-Backup iOmega. *
+-Clear complete tasks. *
+17. Accounts re-organization: *
+a. Place the 'Accounts' directory inside 'C:\Users\Or\Dropbox'. *
+b. Refer all the projects to this location. *
+c. Make sure that after each path change the project still works. *
 -In all the maintenance projects: *
 -Update packages + re-create package.json files. *
 01. Update the 'REMEMBER' section of this document. *
 02. ' all the outcome of the crawling will be created' comment should be updated. *
 03. Add to package.json file the 'INSTRUCTIONS.md' key in the files section (if it exists in the project). *
-04. In the initate.service - const { Mode, ScriptType } = require('../../core/enums/files/system.enum'); - Need to change to ../../core/enums. *
+04. In the initiate.service - const { Mode, ScriptType } = require('../../core/enums/files/system.enum'); - Need to change to ../../core/enums. *
 05. Check if async copyDirectory( is not with line break. *
 06. Fix createDirectory - No need for await in createSessionDirectory method. *
-07. "Validate internet connection works." => "Validate that the internet connection works." *
-08. "sending emails processes." in udemy-courses project. *
+07. 'Validate internet connection works.' => 'Validate that the internet connection works.' *
+08. '...sending emails processes.' in udemy-courses project. *
 09. Rename the function 'getFileData' to 'getJsonFileData'. *
 10. Copy the logic of 'this.updateStatus' to all change statuses in the main script file. *
-11. On udemy-courses project, change the "validate" and "compare" functions to "validateFields" and "compareCourses". *
+11. On udemy-courses project, change the 'validate' and 'compare' functions to 'validateFields' and 'compareCourses'. *
 12. On udemy-courses project, change 'isExpectedFilled' to 'isFilledExpected'. *
 13. Change all function names that return true/false to 'isValidXXX' in validationUtils. *
 14. -In all places change to use isExists instead of .length > 0 or .length <= 0. *
@@ -21,7 +30,7 @@ Complete / canceled tasks:
 18. Place this in all "ToDo" documents of all the projects. *
 16. Add 'INSTRUCTIONS.md' file if it does not exist (add it to files in package.json). *
 17. Add to 'INSTRUCTIONS.md' how the console log should be (take the specific sentence from another project) + *
- /* cSpell:disable */ before the console log status example. *
+ /* cSpell:disable */ before the console log status example. *
 19. Copy the 'updateCount' function (if exists) from 'sender' project. *
 20. Update settings.json:
 "formatFiles.excludePattern": "**/node_modules,**/.vscode,**/dist,**/dist/**,**/.chrome,**/misc,**/misc/**,**/sources,**/sources/**" *
@@ -39,7 +48,7 @@ sources *
 -Go over timeUtils and make sure all local "this.getDay" are being used, and not "date.getDate()" for example. *
 -Fix comment in settings.js 'interval to run to calculate' => 'interval to calculate'. *
 -Add index.js to "configurations" directory and replace in all places. *
--Fix comment:         // Get the backup title from the console.s *
+-Fix comment:         // Get the backup title from the console.s *
 -Fix all README.me + package.json from 'create-react-up' to 'create-react-app'. *
 -Change all ect => etc - In all projects. *
 -Verify package.json project name. *
@@ -47,19 +56,19 @@ sources *
 -Change from 'Start to be built' to 'Built in', and remove space lines, and the "-Goal:", *
 and remove the 'This project was bootstrapped with [Create React App] *
 (https://github.com/facebook/create-react-app).' line under to the description *
-with line space,  all fixes in README.md. *
+with line space,  all fixes in README.md. *
 -Fix the exit bug on the console, it is on status SCAN and not 100% (try to scan cv-spider-v5-console-final project). *
 -Re-format all error numbers + last_index.txt file. *
 -Clear all comments. *
 -Fix all misspells in all TXT files. *
 -Format all documents. *
 -Move all complete tasks to complete_tasks.txt. *
--Verify all works good. *
+-Verify all works well. *
 -Upload to GitHub. *
 -Backup iOmega. *
 -Fix spell mistakes in all txt files. *
 -Remove all unused files, functions, and variables. *
--Remove all debugger. *
+-Remove all 'debugger' keywords. *
 -Do all the ToDo points. *
 -Rewrite error numbers. *
 -Format all files. *
@@ -74,7 +83,7 @@ with line space,  all fixes in README.md. *
 -Replace all 'let' to 'const' and where no bugs - change it. *
 -Add 'Misc.' section to gitignore and npmignore files (include tasks TXT files + backups directory). *
 -Add script name to tests and add validation for empty script name in initiate.service.js. *
--Change the logic of ignoring words today to add it to the initiate process of nspell service. *
+-Change the logic of ignoring words today to add it to the initiation process of nspell service. *
 -Test it works. *
 -Clear all comments again. *
 -Remove the console.log(e) from handleError function. *
@@ -103,12 +112,12 @@ export default *
 ========================= *
 -Move to nspell npm package. *
 -Rebuild the logic the spellCheck.service + add nspell service to build there *
- all the logic of the dictionaries, and provide the nspell. *
--Build the logic to download all the cpell dictionaries by giving links to txt files. *
+ all the logic of the dictionaries, and provide the nspell. *
+-Build the logic to download all the 'cpell' dictionaries by giving links to txt files. *
 -Initiate all the dictionaries after downloading them. *
 -Get all the files inside dictionaries directory and initiate them to the nspell. *
 -If no files inside don't initiate anything. *
--Each time it runs, need to initiate the TXT files. *
+-Each time it runs, it needs to initiate the TXT files. *
 -If a dictionary directory does not exist, download all the files to TXT files to the directory and initiate them. *
 -If a dictionary already exists don't need to download the files again, just initiate the files. *
 -Test again the content for misspells. *
@@ -130,7 +139,7 @@ https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries *
 -Log all the misspells into the dist directory to the file name_#DateTime#. *
 -If unable to open/read the file, catch the exception and continue to the next file. *
 -Both: *
--Clear special symboles (not include .,`) and all none-English characters. *
+-Clear special symbols (not include ,.,`) and all none-English characters. *
 -Ignore words that contain only numbers (at least 2 English characters in a row). *
 -The console log status will look like this: *
 ===[SETTINGS] Time: 00.05:16:58 [-] | Method: NAME | Ignore Words: 45 | Ignore Paths: 10=== *
