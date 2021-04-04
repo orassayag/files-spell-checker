@@ -184,8 +184,7 @@ class LogService {
 
 	createConfirmSettingsTemplate(settings) {
 		const parameters = ['METHOD', 'MODE', 'SCAN_PATH'];
-		let settingsText = '';
-		settingsText += Object.keys(settings).filter(s => parameters.indexOf(s) > -1)
+		let settingsText = Object.keys(settings).filter(s => parameters.indexOf(s) > -1)
 			.map(k => this.createLineTemplate(k, settings[k])).join('');
 		settingsText = textUtils.removeLastCharacter(settingsText);
 		return `${textUtils.setLogStatus('IMPORTANT SETTINGS')}

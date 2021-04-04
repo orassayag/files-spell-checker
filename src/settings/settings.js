@@ -80,7 +80,7 @@ const settings = {
     // ===BACKUP=== //
     // Determine the directories to ignore when a backup copy is taking place.
     // For example: 'dist'.
-    IGNORE_DIRECTORIES: ['dist', 'node_modules', 'dictionaries', 'sources'],
+    IGNORE_DIRECTORIES: ['.git', 'dist', 'node_modules', 'dictionaries', 'sources'],
     // Determine the files to ignore when the back copy is taking place.
     // For example: 'back_sources_tasks.txt'.
     IGNORE_FILES: [],
