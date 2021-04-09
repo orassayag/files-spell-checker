@@ -6,6 +6,7 @@ const applicationService = require('./application.service');
 const countLimitService = require('./countLimit.service');
 const itemService = require('./item.service');
 const logService = require('./log.service');
+const pathService = require('./path.service');
 const spellCheckService = require('./spellCheck.service');
 const globalUtils = require('../../utils/files/global.utils');
 const { fileUtils, textUtils, validationUtils } = require('../../utils');
@@ -29,7 +30,7 @@ class ScanService {
         const methodName = `scanItem${textUtils.capitalizeFirstLetter(applicationService.applicationData.method)}`;
         let isLimitExceeded = false;
         let items = await fileUtils.getFilesRecursive({
-            directory: applicationService.applicationData.scanPath,
+            directory: pathService.pathData.scanPath,
             includeDirectories: isName,
             ignoreFiles: this.ignoreFiles,
             ignorePaths: this.ignorePaths

@@ -22,7 +22,7 @@ const Status = enumUtils.createEnum([
     ['DOWNLOAD', 'DOWNLOAD'],
     ['IMPLEMENT', 'IMPLEMENT'],
     ['SCAN', 'SCAN'],
-    ['LIMIT_EXCEEDED', 'LIMIT_EXCEEDED'],
+    ['LIMIT_EXCEEDED', 'LIMIT EXCEEDED'],
     ['ABORT_BY_THE_USER', 'ABORT BY THE USER'],
     ['FINISH', 'FINISH']
 ]);

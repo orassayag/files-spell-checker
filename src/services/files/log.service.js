@@ -103,7 +103,7 @@ class LogService {
 		const misspellItemsCount = `${StatusIcon.X}  ${textUtils.getNumberWithCommas(itemService.itemData.misspellItemsCount)}`;
 		const itemName = this.getDisplayItem(applicationService.applicationData.itemName);
 		const itemDirectoryPath = this.getDisplayItem(applicationService.applicationData.itemDirectoryPath);
-		const scanPath = this.getDisplayItem(applicationService.applicationData.scanPath);
+		const scanPath = this.getDisplayItem(pathService.pathData.scanPath);
 		logUtils.logProgress({
 			titlesList: ['SETTINGS', 'GENERAL', 'ITEMS', 'WORDS', 'NAME', 'PATH', 'SCAN PATH'],
 			colorsTitlesList: [Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE],

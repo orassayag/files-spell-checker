@@ -2,7 +2,8 @@ class PathData {
 
 	constructor(settings) {
 		// Set the parameters from the settings file.
-		const { DIST_PATH } = settings;
+		const { SCAN_PATH, DIST_PATH } = settings;
+		this.scanPath = SCAN_PATH;
 		this.distPath = DIST_PATH;
 	}
 }

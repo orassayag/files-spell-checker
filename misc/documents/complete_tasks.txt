@@ -1,5 +1,8 @@
 Complete / canceled tasks:
 ==========================
+-Comments: Change 'validateEnumData' to 'data'. *
+-Move the 'this.scanPath' to be in 'pathService'. Change all needed logic + settings.js places under === PATH ===. *
+-In settings.js convert utils path to index, and check if it still works. *
 -Fix all spell mistakes via Gmail. *
 -Format all files. *
 -Upload to GitHub. *
