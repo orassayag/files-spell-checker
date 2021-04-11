@@ -1,5 +1,6 @@
 Complete / canceled tasks:
 ==========================
+-Copy the validation logic of 'SCAN_PATH' in initiate.service from the 'empty-directories' project. *
 -Comments: Change 'validateEnumData' to 'data'. *
 -Move the 'this.scanPath' to be in 'pathService'. Change all needed logic + settings.js places under === PATH ===. *
 -In settings.js convert utils path to index, and check if it still works. *

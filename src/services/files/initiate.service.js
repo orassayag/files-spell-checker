@@ -163,6 +163,7 @@ class InitiateService {
 	validateSpecial() {
 		const { SCAN_PATH, VALIDATION_CONNECTION_LINK } = settings;
 		// ===GENERAL=== //
+		this.validateDirectory(SCAN_PATH);
 		if (fileUtils.isFilePath(SCAN_PATH)) {
 			throw new Error(`The path SCAN_PATH parameter needs to be a directory path but it's a file path: ${SCAN_PATH} (1000011)`);
 		}
@@ -172,22 +173,24 @@ class InitiateService {
 		}
 	}
 
+	validateDirectory(directory) {
+		// Verify that the dist and the sources paths exist.
+		globalUtils.isPathExistsError(directory);
+		// Verify that the dist and the sources paths are accessible.
+		globalUtils.isPathAccessible(directory);
+	}
+
 	validateDirectories() {
 		const keys = this.scriptType === ScriptType.BACKUP ? ['BACKUPS_PATH'] : [];
 		[
 			...keys,
-			// ===GENERAL=== //
-			'SCAN_PATH',
 			// ===ROOT PATH=== //
 			'OUTER_APPLICATION_PATH', 'INNER_APPLICATION_PATH',
 			// ===DYNAMIC PATH=== //
 			'APPLICATION_PATH', 'PACKAGE_JSON_PATH'
 		].map(key => {
 			const value = settings[key];
-			// Verify that the dist and the sources paths exist.
-			globalUtils.isPathExistsError(value);
-			// Verify that the dist and the sources paths are accessible.
-			globalUtils.isPathAccessible(value);
+			this.validateDirectory(value);
 		});
 		[
 			...keys,
@@ -206,10 +209,10 @@ class InitiateService {
 		[
 			// ===DYNAMIC PATH=== //
 			'DIST_PATH', 'NODE_MODULES_PATH', 'DICTIONARIES_PATH'
-		].map(async (key) => {
+		].map(key => {
 			const value = settings[key];
 			// Make sure that the dist directory exists, if not, create it.
-			await fileUtils.createDirectory(value);
+			fileUtils.createDirectory(value);
 		});
 	}
 }

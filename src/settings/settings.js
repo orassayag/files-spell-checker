@@ -13,8 +13,7 @@ const settings = {
     MODE: Mode.STANDARD,
     // Determine the absolute path to scan the files (and directories in case of NAME
     // method) in order to scan them. For example: C:\\Or\\Web\\PuppeteerExample
-    //SCAN_PATH: 'C:\\',
-    SCAN_PATH: 'C:\\Or\\Web\\event-dates-calendar\\event-dates-calendar',
+    SCAN_PATH: 'C:\\',
 
     // ===LOG=== //
     // Determine if to log results for each email to a TXT file.
@@ -45,13 +44,13 @@ const settings = {
     // Determine the application name used for some of the calculated paths.
     APPLICATION_NAME: 'files-spell-checker',
     // Determine the path for the outer application, where other directories located, such as backups, sources, etc...
-    // (Working example: 'C:\\Or\\Web\\sender\\').
+    // (Working example: 'C:\\Or\\Web\\files-spell-checker\\').
     OUTER_APPLICATION_PATH: pathUtils.getJoinPath({
         targetPath: __dirname,
         targetName: '../../../'
     }),
     // Determine the inner application path where all the source of the application is located.
-    // (Working example: 'C:\\Or\\Web\\sender\\sender\\').
+    // (Working example: 'C:\\Or\\Web\\files-spell-checker\\files-spell-checker\\').
     INNER_APPLICATION_PATH: pathUtils.getJoinPath({
         targetPath: __dirname,
         targetName: '../../'
