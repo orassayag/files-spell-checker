@@ -1,5 +1,5 @@
 const settings = require('../../settings/settings');
-const { Method, Mode, ScriptType } = require('../../core/enums');
+const { MethodEnum, ModeEnum, ScriptTypeEnum } = require('../../core/enums');
 const globalUtils = require('../../utils/files/global.utils');
 const { fileUtils, pathUtils, validationUtils } = require('../../utils');
 
@@ -45,10 +45,10 @@ class InitiateService {
 
 	validateScriptType() {
 		if (!this.scriptType || !validationUtils.isValidEnum({
-			enum: ScriptType,
+			enum: ScriptTypeEnum,
 			value: this.scriptType
 		})) {
-			throw new Error('Invalid or no ScriptType parameter was found (1000003)');
+			throw new Error('Invalid or no ScriptTypeEnum parameter was found (1000003)');
 		}
 	}
 
@@ -70,7 +70,7 @@ class InitiateService {
 			NODE_MODULES_PATH, PACKAGE_JSON_PATH, PACKAGE_LOCK_JSON_PATH, DICTIONARIES_PATH } = settings;
 		// ===DYNAMIC PATH=== //
 		settings.APPLICATION_PATH = pathUtils.getJoinPath({ targetPath: OUTER_APPLICATION_PATH, targetName: APPLICATION_PATH });
-		if (this.scriptType === ScriptType.BACKUP) {
+		if (this.scriptType === ScriptTypeEnum.BACKUP) {
 			settings.BACKUPS_PATH = pathUtils.getJoinPath({ targetPath: OUTER_APPLICATION_PATH, targetName: BACKUPS_PATH });
 		}
 		settings.DIST_PATH = pathUtils.getJoinPath({ targetPath: INNER_APPLICATION_PATH, targetName: DIST_PATH });
@@ -99,7 +99,7 @@ class InitiateService {
 	}
 
 	validateStrings() {
-		const keys = this.scriptType === ScriptType.BACKUP ? ['BACKUPS_PATH'] : [];
+		const keys = this.scriptType === ScriptTypeEnum.BACKUP ? ['BACKUPS_PATH'] : [];
 		[
 			...keys,
 			// ===GENERAL=== //
@@ -147,13 +147,13 @@ class InitiateService {
 		const { METHOD, MODE } = settings;
 		// ===GENERAL=== //
 		if (!validationUtils.isValidEnum({
-			enum: Method,
+			enum: MethodEnum,
 			value: METHOD
 		})) {
 			throw new Error('Invalid or no METHOD parameter was found (1000009)');
 		}
 		if (!validationUtils.isValidEnum({
-			enum: Mode,
+			enum: ModeEnum,
 			value: MODE
 		})) {
 			throw new Error('Invalid or no MODE parameter was found (1000010)');
@@ -181,7 +181,7 @@ class InitiateService {
 	}
 
 	validateDirectories() {
-		const keys = this.scriptType === ScriptType.BACKUP ? ['BACKUPS_PATH'] : [];
+		const keys = this.scriptType === ScriptTypeEnum.BACKUP ? ['BACKUPS_PATH'] : [];
 		[
 			...keys,
 			// ===ROOT PATH=== //

@@ -1,4 +1,4 @@
-const { Method, Mode } = require('../core/enums');
+const { MethodEnum, ModeEnum } = require('../core/enums');
 const { pathUtils } = require('../utils');
 
 const settings = {
@@ -6,13 +6,13 @@ const settings = {
     // Determine the method type of checking misspells: NAME / CONTENT.
     // NAME = Scan file and directory names for misspells.
     // CONTENT = Scan file contents for misspells.
-    METHOD: Method.NAME,
+    METHOD: MethodEnum.NAME,
     // Determine the mode of the application: STANDARD / SILENT.
     // STANDARD - Display the console status log while the application is running.
     // SILENT - Don't display anything while the application is running.
-    MODE: Mode.STANDARD,
+    MODE: ModeEnum.STANDARD,
     // Determine the absolute path to scan the files (and directories in case of NAME
-    // method) in order to scan them. For example: C:\\Or\\Web\\PuppeteerExample
+    // method) in order to scan them. For example: C:\\Or\\Web\\puppeteer-example
     SCAN_PATH: 'C:\\',
 
     // ===LOG=== //

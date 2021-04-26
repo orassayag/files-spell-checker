@@ -1,6 +1,6 @@
 const byline = require('byline');
-const { CheckResults } = require('../../core/models');
-const { Method, Status } = require('../../core/enums');
+const { CheckResultsModel } = require('../../core/models');
+const { MethodEnum, StatusEnum } = require('../../core/enums');
 const { allowFileExtensions, ignoreFiles, ignorePaths } = require('../../configurations');
 const applicationService = require('./application.service');
 const countLimitService = require('./countLimit.service');
@@ -26,33 +26,33 @@ class ScanService {
     }
 
     async run() {
-        const isName = applicationService.applicationData.method === Method.NAME;
-        const methodName = `scanItem${textUtils.capitalizeFirstLetter(applicationService.applicationData.method)}`;
+        const isName = applicationService.applicationDataModel.method === MethodEnum.NAME;
+        const methodName = `scanItem${textUtils.capitalizeFirstLetter(applicationService.applicationDataModel.method)}`;
         let isLimitExceeded = false;
         let items = await fileUtils.getFilesRecursive({
-            directory: pathService.pathData.scanPath,
+            directory: pathService.pathDataModel.scanPath,
             includeDirectories: isName,
             ignoreFiles: this.ignoreFiles,
             ignorePaths: this.ignorePaths
         });
-        items = items.slice(0, countLimitService.countLimitData.maximumItemsCount);
-        itemService.itemData.totalItemsCount = items.length;
-        applicationService.applicationData.status = Status.SCAN;
+        items = items.slice(0, countLimitService.countLimitDataModel.maximumItemsCount);
+        itemService.itemDataModel.totalItemsCount = items.length;
+        applicationService.applicationDataModel.status = StatusEnum.SCAN;
         for (let i = 0; i < items.length; i++) {
-            const checkResults = await this[methodName](items[i], i + 1);
-            if (!checkResults) {
+            const checkResultsModel = await this[methodName](items[i], i + 1);
+            if (!checkResultsModel) {
                 continue;
             }
-            itemService.itemData.scanItemsCount++;
-            if (checkResults.isItemMisspell) {
-                itemService.itemData.misspellItemsCount++;
-                await logService.logCheckResults(checkResults);
+            itemService.itemDataModel.scanItemsCount++;
+            if (checkResultsModel.isItemMisspell) {
+                itemService.itemDataModel.misspellItemsCount++;
+                await logService.logCheckResults(checkResultsModel);
             }
-            if (checkResults.isLimitExceeded) {
+            if (checkResultsModel.isLimitExceeded) {
                 isLimitExceeded = true;
                 break;
             }
-            applicationService.applicationData.itemCheckResult = checkResults.resultsList[0];
+            applicationService.applicationDataModel.itemCheckResult = checkResultsModel.resultsList[0];
         }
         return isLimitExceeded;
     }
@@ -61,33 +61,33 @@ class ScanService {
         return new Promise(async (resolve, reject) => {
             if (reject) { }
             try {
-                applicationService.applicationData.itemIndex = index;
-                itemService.itemData.scanItemsCount++;
-                const checkResults = new CheckResults(itemPath);
+                applicationService.applicationDataModel.itemIndex = index;
+                itemService.itemDataModel.scanItemsCount++;
+                const checkResultsModel = new CheckResultsModel(itemPath);
                 const { itemName, itemFullName, itemDirectoryPath } = fileUtils.getItemName(itemPath);
-                applicationService.applicationData.itemName = itemFullName;
-                applicationService.applicationData.itemDirectoryPath = itemDirectoryPath;
+                applicationService.applicationDataModel.itemName = itemFullName;
+                applicationService.applicationDataModel.itemDirectoryPath = itemDirectoryPath;
                 const wordsList = textUtils.getSplitWords(itemName);
                 for (let i = 0; i < wordsList.length; i++) {
-                    itemService.itemData.scanWordsCount++;
+                    itemService.itemDataModel.scanWordsCount++;
                     let word = wordsList[i];
                     word = textUtils.replaceNoneAlphabets(word, '');
-                    const checkResult = spellCheckService.check(word);
-                    if (checkResult.isIgnore) {
-                        itemService.itemData.ignoreWordsCount++;
+                    const checkResultModel = spellCheckService.check(word);
+                    if (checkResultModel.isIgnore) {
+                        itemService.itemDataModel.ignoreWordsCount++;
                     }
-                    if (validationUtils.isExists(checkResult.suggestions)) {
-                        itemService.itemData.misspellWordsCount++;
-                        checkResults.isItemMisspell = true;
+                    if (validationUtils.isExists(checkResultModel.suggestions)) {
+                        itemService.itemDataModel.misspellWordsCount++;
+                        checkResultsModel.isItemMisspell = true;
                     }
-                    checkResults.resultsList.push(checkResult);
-                    checkResults.isLimitExceeded = itemService.itemData.scanWordsCount > countLimitService.countLimitData.maximumWordsScanCount;
-                    if (checkResults.isLimitExceeded) {
+                    checkResultsModel.resultsList.push(checkResultModel);
+                    checkResultsModel.isLimitExceeded = itemService.itemDataModel.scanWordsCount > countLimitService.countLimitDataModel.maximumWordsScanCount;
+                    if (checkResultsModel.isLimitExceeded) {
                         break;
                     }
                 }
-                await globalUtils.sleep(countLimitService.countLimitData.millisecondsBetweenItemsDelayCount);
-                resolve(checkResults);
+                await globalUtils.sleep(countLimitService.countLimitDataModel.millisecondsBetweenItemsDelayCount);
+                resolve(checkResultsModel);
             }
             catch (e) { this.handleError(e); }
         }).catch(e => this.handleError(e));
@@ -97,36 +97,36 @@ class ScanService {
         return new Promise((resolve, reject) => {
             if (reject) { }
             try {
-                applicationService.applicationData.itemIndex = index;
+                applicationService.applicationDataModel.itemIndex = index;
                 const fileType = fileUtils.getFileType(itemPath);
                 if (this.allowFileExtensions.findIndex(file => file === fileType.toLowerCase()) === -1) {
-                    itemService.itemData.skipItemsCount++;
+                    itemService.itemDataModel.skipItemsCount++;
                     resolve(null);
                     return;
                 }
-                itemService.itemData.scanItemsCount++;
-                const checkResults = new CheckResults(itemPath);
+                itemService.itemDataModel.scanItemsCount++;
+                const checkResultsModel = new CheckResultsModel(itemPath);
                 const { itemFullName, itemDirectoryPath } = fileUtils.getItemName(itemPath);
-                applicationService.applicationData.itemName = itemFullName;
-                applicationService.applicationData.itemDirectoryPath = itemDirectoryPath;
+                applicationService.applicationDataModel.itemName = itemFullName;
+                applicationService.applicationDataModel.itemDirectoryPath = itemDirectoryPath;
                 const stream = byline(fileUtils.createStream(itemPath));
                 stream.on('data', (line) => {
                     line = textUtils.replaceNoneAlphabets(line, ' ');
                     const wordsList = textUtils.getSplitWords(line);
                     for (let i = 0; i < wordsList.length; i++) {
-                        itemService.itemData.scanWordsCount++;
+                        itemService.itemDataModel.scanWordsCount++;
                         const word = wordsList[i];
-                        const checkResult = spellCheckService.check(word);
-                        if (checkResult.isIgnore) {
-                            itemService.itemData.ignoreWordsCount++;
+                        const checkResultModel = spellCheckService.check(word);
+                        if (checkResultModel.isIgnore) {
+                            itemService.itemDataModel.ignoreWordsCount++;
                         }
-                        if (validationUtils.isExists(checkResult.suggestions)) {
-                            itemService.itemData.misspellWordsCount++;
-                            checkResults.isItemMisspell = true;
+                        if (validationUtils.isExists(checkResultModel.suggestions)) {
+                            itemService.itemDataModel.misspellWordsCount++;
+                            checkResultsModel.isItemMisspell = true;
                         }
-                        checkResults.resultsList.push(checkResult);
-                        checkResults.isLimitExceeded = itemService.itemData.scanWordsCount > countLimitService.countLimitData.maximumWordsScanCount;
-                        if (checkResults.isLimitExceeded) {
+                        checkResultsModel.resultsList.push(checkResultModel);
+                        checkResultsModel.isLimitExceeded = itemService.itemDataModel.scanWordsCount > countLimitService.countLimitDataModel.maximumWordsScanCount;
+                        if (checkResultsModel.isLimitExceeded) {
                             stream.destroy();
                             break;
                         }
@@ -134,14 +134,14 @@ class ScanService {
                     stream.pause();
                     setTimeout(() => {
                         stream.resume();
-                    }, countLimitService.countLimitData.millisecondsBetweenItemsDelayCount);
+                    }, countLimitService.countLimitDataModel.millisecondsBetweenItemsDelayCount);
                 });
                 stream.on('end', () => {
-                    resolve(checkResults);
+                    resolve(checkResultsModel);
                     return;
                 });
                 stream.on('close', () => {
-                    resolve(checkResults);
+                    resolve(checkResultsModel);
                     return;
                 });
             }
@@ -151,7 +151,7 @@ class ScanService {
 
     handleError(e) {
         if (e) { }
-        itemService.itemData.errorItemsCount++;
+        itemService.itemDataModel.errorItemsCount++;
     }
 }
 

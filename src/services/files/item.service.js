@@ -1,13 +1,13 @@
-const { ItemData } = require('../../core/models');
+const { ItemDataModel } = require('../../core/models');
 
 class ItemService {
 
     constructor() {
-        this.itemData = null;
+        this.itemDataModel = null;
     }
 
     initiate() {
-        this.itemData = new ItemData();
+        this.itemDataModel = new ItemDataModel();
     }
 }
 

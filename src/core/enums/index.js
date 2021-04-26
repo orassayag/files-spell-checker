@@ -1,8 +1,8 @@
-const { Placeholder } = require('./files/placeholder.enum');
-const { Method, Mode, ScriptType, Status } = require('./files/system.enum');
-const { Color, ColorCode, StatusIcon } = require('./files/text.enum');
+const { PlaceholderEnum } = require('./files/placeholder.enum');
+const { MethodEnum, ModeEnum, ScriptTypeEnum, StatusEnum } = require('./files/system.enum');
+const { ColorEnum, ColorCodeEnum, StatusIconEnum } = require('./files/text.enum');
 
 module.exports = {
-    Color, ColorCode, Method, Mode, Placeholder, ScriptType, Status,
-    StatusIcon
+    ColorEnum, ColorCodeEnum, MethodEnum, ModeEnum, PlaceholderEnum, ScriptTypeEnum, StatusEnum,
+    StatusIconEnum
 };

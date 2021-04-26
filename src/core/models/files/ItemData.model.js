@@ -1,4 +1,4 @@
-class ItemData {
+class ItemDataModel {
 
 	constructor() {
 		this.totalItemsCount = 0;
@@ -11,4 +11,4 @@ class ItemData {
 	}
 }
 
-module.exports = ItemData;
+module.exports = ItemDataModel;

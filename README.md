@@ -7,13 +7,13 @@ Built in February 2020. A Node.js application to scan file names, directory path
 Clone the application to your computer.
 Steps to view the solution:
 1. Open server application on IDE (I use VSCode).
-2. Terminal: npm i
-3. In terminal: npm start
+2. In the terminal: npm i
+3. In the terminal: npm start
 
 READ THE FOLLOWING SETTINGS BEFORE YOU BEGIN:
 
 -Instructions & How to use:
-In terminal: npm start
+In the terminal: npm start
 
 Happy testing! :)
 

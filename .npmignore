@@ -31,11 +31,11 @@ dictionaries/
 dictionaries
 
 # Misc.
-**/misc/backup/
-/misc/backup
-misc/backup/
-/misc/backup/
-misc/backup
+**/misc/backups/
+/misc/backups
+misc/backups/
+/misc/backups/
+misc/backups
 
 # Logs.
 /logs

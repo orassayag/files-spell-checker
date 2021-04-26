@@ -1,4 +1,4 @@
-class CheckResults {
+class CheckResultsModel {
 
     constructor(itemPath) {
         this.itemPath = itemPath;
@@ -8,4 +8,4 @@ class CheckResults {
     }
 }
 
-module.exports = CheckResults;
+module.exports = CheckResultsModel;

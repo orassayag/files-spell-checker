@@ -1,5 +1,61 @@
 Complete / canceled tasks:
 ==========================
+-Update packages + Recreate package-lock.json. *
+-Due to the break changes of log-update packages, need to use postinstall script to fix the direct file: *
+1. Remove the 'wrap-ansi', 'slice-ansi', 'cli-cursor', 'ansi-escapes' packages from the 'package.json' file. *
+2. Delete the 'log-update' directory. *
+3. Install the original 'log-update' package. *
+4. Change in the 'log.utils' file to use the 'require('log-update');' syntax. *
+5. Add the postinstall script, add the 'script/initiate.js' file. *
+6. Add the 'INITIATE' key/value to the ScriptType enum. *
+7. Add the 'postinstall' script to the 'package.json file'. *
+8. Run in the terminal 'npm i' + Recreate the 'package-lock.json' file. *
+9. Format the 2 files. *
+10. Make sure all work as expected. *
+-Remove the 'destination' parameter in the 'filterDirectories' method + Verify that backup still works. *
+-Clear unused enums and make sure all in used really exists. *
+-Replace the 'getCurrentDate' method with the updated one from the 'udemy-courses' project. *
+-Rename and check: countLimitService.countLimitData.millisecondsSendEmailDelayCount. *
+-Check and reset the '.vscode/settings.json' by 'C:/Or/Web/auto-packages-updater/auto-packages-updater/.vscode/settings.json' + *
+Format all documents and re-add 'cSpell.words' all the words + add the 'cSpell.ignorePaths' + add 'dictionaries' path as well. *
+-In validation file path (probably a JSON file) there is a 'Expected a number' comment, need to fix it *
+(take the comment from the auto-packages-updater project). *
+-Convert 'removeLastCharacter' to use 'removeLastCharacters'. *
+-All time logic is in place + Take the 'getCurrentDate' function from the 'event-dates-calendar' project. *
+-Make sure to have space between /* cSpell:disable */ in the 'INSTRUCTIONS.md' file. *
+-Make sure to fix the grammar mistake in the 'enum.utils.js' file (an enum-like object). *
+-In the 'README.md' file, fix in all places to 'In the terminal'. *
+-Make sure that all places 'this.exit' function - Need to be 'await this.exit'. *
+-Search for 'async ' and create a list of functions/methods, and make sure that all calls have await. *
+-Scan all files for spell mistakes with the 'files-spell-checker' project. *
+-Change all (where it's possible) from 'console.log' to 'logUtils.log'. *
+-Take the latest settings from '.vscode/settings.json' and implement them. *
+-Change in all places that globalUtils will be on top. *
+-In the 'package.json' file change to 'private: false'. *
+-Convert in all places from all versions of canceled keyword to 'Canceled' keyword. *
+-Add in all places 'name.model' to all models. *
+-Check that in all places the name of the file includes the name of tha parent directory. For example: name.model inside 'models' directory. *
+-Don't forget to do the same rename logic for all the enums in the project. *
+-Change in all places the config from 'misc/backup' to 'misc/backups' directory. *
+-Copy the '.eslintignore' file from the 'udemy-courses' project. *
+-Add to the 'package.json' file (below the 'description' field) the 'repository' field: *
+"repository": { *
+  "type": "git", *
+  "url": "git://github.com/username/repository.git" *
+} *
+-Make sure all switch-case have curly braces. *
+-Remove code comments to a backup TXT file. *
+-Remove the duplicate empty lines: \n\s*\n\s*\n *
+-Remove the first empty line: ^(?<![\s])\n *
+-Remove the last empty line: \n\s*$(?!\n) *
+-Detect all comments without a dot at the end: ^// .*(?<!\.)$ *
+-Format all documents. *
+-Verify all works well.
+-After all works well - Check number 11 in the 'INSTRUCTIONS.md' file. *
+-Fix TXT files spell mistakes via Gmail. *
+-Move all complete tasks from here to complete_tasks.txt. *
+-Upload to GitHub. *
+-Backup to iOmega. *
 -Copy the validation logic of 'SCAN_PATH' in initiate.service from the 'empty-directories' project. *
 -Comments: Change 'validateEnumData' to 'data'. *
 -Move the 'this.scanPath' to be in 'pathService'. Change all needed logic + settings.js places under === PATH ===. *
@@ -18,7 +74,7 @@ c. Make sure that after each path change the project still works. *
 01. Update the 'REMEMBER' section of this document. *
 02. ' all the outcome of the crawling will be created' comment should be updated. *
 03. Add to package.json file the 'INSTRUCTIONS.md' key in the files section (if it exists in the project). *
-04. In the initiate.service - const { Mode, ScriptType } = require('../../core/enums/files/system.enum'); - Need to change to ../../core/enums. *
+04. In the initiate.service - const { ModeEnum, ScriptTypeEnum } = require('../../core/enums/files/system.enum'); - Need to change to ../../core/enums. *
 05. Check if async copyDirectory( is not with line break. *
 06. Fix createDirectory - No need for await in createSessionDirectory method. *
 07. 'Validate internet connection works.' => 'Validate that the internet connection works.' *
@@ -111,11 +167,11 @@ export default *
 -Merge scanContent.service.js and scanName.service.js into single file, since it's using most of the same code - run with the same "run" function. *
 -Add on CONTENT the skip counter. *
 -Add index.js to "configurations" directory and replace in all places. *
--Add ignore words in file names only in CONTENT method - canceled. *
+-Add ignore words in file names only in CONTENT method - Canceled. *
 -The content scan script: *
 ========================= *
 -Move to nspell npm package. *
--Rebuild the logic the spellCheck.service + add nspell service to build there *
+-Rebuild the logic of the spellCheck.service + add nspell service to build there *
  all the logic of the dictionaries, and provide the nspell. *
 -Build the logic to download all the 'cpell' dictionaries by giving links to txt files. *
 -Initiate all the dictionaries after downloading them. *
@@ -137,7 +193,7 @@ https://github.com/streetsidesoftware/cspell-dicts/tree/master/dictionaries *
 -Verify all works af before. *
 -Add to the console status line the path to scan. *
 5. Limit the count of words for each file name/content. *
--Build a scan file in the tests directory, that will both display the result for the file name and the content - canceled. *
+-Build a scan file in the tests directory, that will both display the result for the file name and the content - Canceled. *
 -The name scan script: *
 ====================== *
 -Log all the misspells into the dist directory to the file name_#DateTime#. *
@@ -171,4 +227,4 @@ task => task, tak, te. *
 3. Ignore paths list. *
 4. Limit files count to check. *
 -Test the "typo-js" npm package. *
--Add options to limit the number of files to scan - canceled. *
+-Add options to limit the number of files to scan - Canceled. *

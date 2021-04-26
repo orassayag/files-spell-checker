@@ -1,5 +1,5 @@
-const { LogData } = require('../../core/models');
-const { Color, Placeholder, StatusIcon } = require('../../core/enums');
+const { LogDataModel } = require('../../core/models');
+const { ColorEnum, PlaceholderEnum, StatusIconEnum } = require('../../core/enums');
 const { ignorePaths, ignoreWords } = require('../../configurations');
 const applicationService = require('./application.service');
 const countLimitService = require('./countLimit.service');
@@ -10,7 +10,7 @@ const { fileUtils, logUtils, pathUtils, textUtils, timeUtils, validationUtils } 
 class LogService {
 
 	constructor() {
-		this.logData = null;
+		this.logDataModel = null;
 		this.logInterval = null;
 		// ===PATH=== //
 		this.baseSessionPath = null;
@@ -26,16 +26,16 @@ class LogService {
 	}
 
 	initiate(settings) {
-		this.logData = new LogData(settings);
+		this.logDataModel = new LogDataModel(settings);
 		this.initiateDirectories();
 	}
 
 	initiateDirectories() {
 		// ===PATH=== //
-		if (!this.logData.isLogResults) {
+		if (!this.logDataModel.isLogResults) {
 			return;
 		}
-		this.baseSessionPath = pathService.pathData.distPath;
+		this.baseSessionPath = pathService.pathDataModel.distPath;
 		fileUtils.createDirectory(this.baseSessionPath);
 		this.getNextDirectoryIndex();
 		this.createSessionDirectory();
@@ -44,7 +44,7 @@ class LogService {
 	createSessionDirectory() {
 		this.sessionDirectoryPath = pathUtils.getJoinPath({
 			targetPath: this.baseSessionPath,
-			targetName: `${this.directoryIndex}_${applicationService.applicationData.logDateTime}`
+			targetName: `${this.directoryIndex}_${applicationService.applicationDataModel.logDateTime}`
 		});
 		fileUtils.createDirectory(this.sessionDirectoryPath);
 		this.updateFileName();
@@ -57,13 +57,13 @@ class LogService {
 		else {
 			this.fileIndex = 1;
 		}
-		this.itemResultsPath = this.createFilePath(`${this.fileIndex}_${textUtils.toLowerCase(applicationService.applicationData.method)}_${Placeholder.DATE}`);
+		this.itemResultsPath = this.createFilePath(`${this.fileIndex}_${textUtils.toLowerCase(applicationService.applicationDataModel.method)}_${PlaceholderEnum.DATE}`);
 	}
 
 	createFilePath(fileName) {
 		return pathUtils.getJoinPath({
-			targetPath: this.sessionDirectoryPath ? this.sessionDirectoryPath : pathService.pathData.distPath,
-			targetName: `${fileName.replace(Placeholder.DATE, applicationService.applicationData.logDateTime)}.txt`
+			targetPath: this.sessionDirectoryPath ? this.sessionDirectoryPath : pathService.pathDataModel.distPath,
+			targetName: `${fileName.replace(PlaceholderEnum.DATE, applicationService.applicationDataModel.logDateTime)}.txt`
 		});
 	}
 
@@ -80,49 +80,48 @@ class LogService {
 		// Start the process for the first interval round.
 		this.logInterval = setInterval(() => {
 			// Update the current time of the process.
-			const time = timeUtils.getDifferenceTimeBetweenDates({
-				startDateTime: applicationService.applicationData.startDateTime,
-				endDateTime: new Date()
+			applicationService.applicationDataModel.time = timeUtils.getDifferenceTimeBetweenDates({
+				startDateTime: applicationService.applicationDataModel.startDateTime,
+				endDateTime: timeUtils.getCurrentDate()
 			});
-			applicationService.applicationData.time = time;
 			// Log the status console each interval round.
 			this.logProgress();
-		}, countLimitService.countLimitData.millisecondsIntervalCount);
+		}, countLimitService.countLimitDataModel.millisecondsIntervalCount);
 	}
 
 	getDisplayItem(itemName) {
-		return textUtils.cutText({ text: itemName, count: countLimitService.countLimitData.maximumItemNamePathCharactersDisplayCount });
+		return textUtils.cutText({ text: itemName, count: countLimitService.countLimitDataModel.maximumItemNamePathCharactersDisplayCount });
 	}
 
 	logProgress() {
-		const time = `${applicationService.applicationData.time} [${this.frames[this.i = ++this.i % this.frames.length]}]`;
-		const currentPercentage = textUtils.calculatePercentageDisplay({ partialValue: applicationService.applicationData.itemIndex, totalValue: itemService.itemData.totalItemsCount });
-		const current = textUtils.getNumberOfNumber({ number1: applicationService.applicationData.itemIndex, number2: itemService.itemData.totalItemsCount });
+		const time = `${applicationService.applicationDataModel.time} [${this.frames[this.i = ++this.i % this.frames.length]}]`;
+		const currentPercentage = textUtils.calculatePercentageDisplay({ partialValue: applicationService.applicationDataModel.itemIndex, totalValue: itemService.itemDataModel.totalItemsCount });
+		const current = textUtils.getNumberOfNumber({ number1: applicationService.applicationDataModel.itemIndex, number2: itemService.itemDataModel.totalItemsCount });
 		const currentItem = `${current} (${currentPercentage})`;
-		const scanItemsCount = `${StatusIcon.V}  ${textUtils.getNumberWithCommas(itemService.itemData.scanItemsCount)}`;
-		const misspellItemsCount = `${StatusIcon.X}  ${textUtils.getNumberWithCommas(itemService.itemData.misspellItemsCount)}`;
-		const itemName = this.getDisplayItem(applicationService.applicationData.itemName);
-		const itemDirectoryPath = this.getDisplayItem(applicationService.applicationData.itemDirectoryPath);
-		const scanPath = this.getDisplayItem(pathService.pathData.scanPath);
+		const scanItemsCount = `${StatusIconEnum.V}  ${textUtils.getNumberWithCommas(itemService.itemDataModel.scanItemsCount)}`;
+		const misspellItemsCount = `${StatusIconEnum.X}  ${textUtils.getNumberWithCommas(itemService.itemDataModel.misspellItemsCount)}`;
+		const itemName = this.getDisplayItem(applicationService.applicationDataModel.itemName);
+		const itemDirectoryPath = this.getDisplayItem(applicationService.applicationDataModel.itemDirectoryPath);
+		const scanPath = this.getDisplayItem(pathService.pathDataModel.scanPath);
 		logUtils.logProgress({
 			titlesList: ['SETTINGS', 'GENERAL', 'ITEMS', 'WORDS', 'NAME', 'PATH', 'SCAN PATH'],
-			colorsTitlesList: [Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE],
+			colorsTitlesList: [ColorEnum.BLUE, ColorEnum.BLUE, ColorEnum.BLUE, ColorEnum.BLUE, ColorEnum.BLUE, ColorEnum.BLUE, ColorEnum.BLUE],
 			keysLists: [{
 				'Time': time,
-				'Method': applicationService.applicationData.method,
+				'Method': applicationService.applicationDataModel.method,
 				'Ignore Words': ignoreWords.length,
 				'Ignore Paths': ignorePaths.length
 			}, {
 				'Current': currentItem,
-				'Status': applicationService.applicationData.status
+				'Status': applicationService.applicationDataModel.status
 			}, {
 				'Total': scanItemsCount,
 				'Misspell': misspellItemsCount,
-				'Skip': itemService.itemData.skipItemsCount,
-				'Error': itemService.itemData.errorItemsCount
+				'Skip': itemService.itemDataModel.skipItemsCount,
+				'Error': itemService.itemDataModel.errorItemsCount
 			}, {
-				'Total': itemService.itemData.scanWordsCount,
-				'Misspell': itemService.itemData.misspellWordsCount
+				'Total': itemService.itemDataModel.scanWordsCount,
+				'Misspell': itemService.itemDataModel.misspellWordsCount
 			}, {
 				'#': itemName
 			}, {
@@ -131,21 +130,21 @@ class LogService {
 				'#': scanPath
 			}],
 			colorsLists: [
-				[Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW],
-				[Color.YELLOW, Color.YELLOW],
-				[Color.GREEN, Color.RED, Color.CYAN, Color.CYAN],
-				[Color.GREEN, Color.RED],
+				[ColorEnum.YELLOW, ColorEnum.YELLOW, ColorEnum.YELLOW, ColorEnum.YELLOW],
+				[ColorEnum.YELLOW, ColorEnum.YELLOW],
+				[ColorEnum.GREEN, ColorEnum.RED, ColorEnum.CYAN, ColorEnum.CYAN],
+				[ColorEnum.GREEN, ColorEnum.RED],
 				[],
 				[],
 				[]
 			],
 			nonNumericKeys: {},
-			statusColor: Color.CYAN
+			statusColor: ColorEnum.CYAN
 		});
 	}
 
-	createEmailTemplate(checkResults) {
-		const { itemPath, resultsList } = checkResults;
+	createEmailTemplate(checkResultsModel) {
+		const { itemPath, resultsList } = checkResultsModel;
 		const lines = [];
 		lines.push(itemPath);
 		for (let i = 0; i < resultsList.length; i++) {
@@ -161,16 +160,16 @@ class LogService {
 
 	updateSessionDirectoryPath() {
 		this.logCounts++;
-		if (this.logCounts % countLimitService.countLimitData.maximumLogsCountPerFile === 0) {
+		if (this.logCounts % countLimitService.countLimitDataModel.maximumLogsCountPerFile === 0) {
 			this.updateFileName();
 		}
 	}
 
-	async logCheckResults(checkResults) {
-		if (!this.logData.isLogResults) {
+	async logCheckResults(checkResultsModel) {
+		if (!this.logDataModel.isLogResults) {
 			return;
 		}
-		const message = this.createEmailTemplate(checkResults);
+		const message = this.createEmailTemplate(checkResultsModel);
 		await fileUtils.appendFile({
 			targetPath: this.itemResultsPath,
 			message: message
@@ -179,14 +178,17 @@ class LogService {
 	}
 
 	createLineTemplate(title, value) {
-		return textUtils.addBreakLine(`${logUtils.logColor(`${title}:`, Color.MAGENTA)} ${value}`);
+		return textUtils.addBreakLine(`${logUtils.logColor(`${title}:`, ColorEnum.MAGENTA)} ${value}`);
 	}
 
 	createConfirmSettingsTemplate(settings) {
 		const parameters = ['METHOD', 'MODE', 'SCAN_PATH'];
 		let settingsText = Object.keys(settings).filter(s => parameters.indexOf(s) > -1)
 			.map(k => this.createLineTemplate(k, settings[k])).join('');
-		settingsText = textUtils.removeLastCharacter(settingsText);
+		settingsText = textUtils.removeLastCharacters({
+			value: settingsText,
+			charactersCount: 1
+		});
 		return `${textUtils.setLogStatus('IMPORTANT SETTINGS')}
 ${settingsText}
 ========================

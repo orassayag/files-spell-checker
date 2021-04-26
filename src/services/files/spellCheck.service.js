@@ -1,4 +1,4 @@
-const { CheckResult } = require('../../core/models');
+const { CheckResultModel } = require('../../core/models');
 const nSpellService = require('./nspell.service');
 
 class SpellCheckService {
@@ -6,17 +6,17 @@ class SpellCheckService {
     constructor() { }
 
     check(word) {
-        const checkResult = new CheckResult(word);
+        const checkResultModel = new CheckResultModel(word);
         if (!word || word.length <= 1) {
-            return checkResult;
+            return checkResultModel;
         }
         word = word.trim();
         if (!word || word.length <= 1) {
-            return checkResult;
+            return checkResultModel;
         }
-        checkResult.fix = word;
-        checkResult.suggestions = nSpellService.spell.suggest(checkResult.fix);
-        return checkResult;
+        checkResultModel.fix = word;
+        checkResultModel.suggestions = nSpellService.spell.suggest(checkResultModel.fix);
+        return checkResultModel;
     }
 }
 

@@ -1,14 +1,14 @@
-const ApplicationData = require('./files/ApplicationData');
-const BackupData = require('./files/BackupData');
-const BackupDirectory = require('./files/BackupDirectory');
-const CheckResult = require('./files/CheckResult');
-const CheckResults = require('./files/CheckResults');
-const CountLimitData = require('./files/CountLimitData');
-const ItemData = require('./files/ItemData');
-const LogData = require('./files/LogData');
-const PathData = require('./files/PathData');
+const ApplicationDataModel = require('./files/ApplicationData.model');
+const BackupDataModel = require('./files/BackupData.model');
+const BackupDirectoryModel = require('./files/BackupDirectory.model');
+const CheckResultModel = require('./files/CheckResult.model');
+const CheckResultsModel = require('./files/CheckResults.model');
+const CountLimitDataModel = require('./files/CountLimitData.model');
+const ItemDataModel = require('./files/ItemData.model');
+const LogDataModel = require('./files/LogData.model');
+const PathDataModel = require('./files/PathData.model');
 
 module.exports = {
-    ApplicationData, BackupData, BackupDirectory, CheckResult, CheckResults, CountLimitData,
-    ItemData, LogData, PathData
+    ApplicationDataModel, BackupDataModel, BackupDirectoryModel, CheckResultModel, CheckResultsModel, CountLimitDataModel,
+    ItemDataModel, LogDataModel, PathDataModel
 };

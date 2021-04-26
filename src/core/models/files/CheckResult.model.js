@@ -1,4 +1,4 @@
-class CheckResult {
+class CheckResultModel {
 
     constructor(original) {
         this.original = original;
@@ -8,4 +8,4 @@ class CheckResult {
     }
 }
 
-module.exports = CheckResult;
+module.exports = CheckResultModel;

@@ -1,9 +1,9 @@
 const settings = require('../settings/settings');
-const { Color, Mode, Status } = require('../core/enums');
+const { ColorEnum, ModeEnum, StatusEnum } = require('../core/enums');
 const { applicationService, confirmationService, countLimitService, logService, nSpellService,
     itemService, pathService, scanService, validationService } = require('../services');
 const globalUtils = require('../utils/files/global.utils');
-const { logUtils, systemUtils } = require('../utils');
+const { logUtils, systemUtils, timeUtils } = require('../utils');
 
 class ScanLogic {
 
@@ -21,7 +21,7 @@ class ScanLogic {
     }
 
     async initiate() {
-        this.updateStatus('INITIATE THE SERVICES', Status.INITIATE);
+        this.updateStatus('INITIATE THE SERVICES', StatusEnum.INITIATE);
         await nSpellService.initiate(settings);
         itemService.initiate();
         scanService.initiate();
@@ -30,53 +30,53 @@ class ScanLogic {
     }
 
     async validateGeneralSettings() {
-        this.updateStatus('VALIDATE GENERAL SETTINGS', Status.VALIDATE);
+        this.updateStatus('VALIDATE GENERAL SETTINGS', StatusEnum.VALIDATE);
         // Validate that the internet connection works.
         countLimitService.initiate(settings);
-        applicationService.initiate(settings, Status.INITIATE);
+        applicationService.initiate(settings, StatusEnum.INITIATE);
         await validationService.validateInternetConnection();
     }
 
     async startSession() {
         // Initiate.
-        applicationService.applicationData.startDateTime = new Date();
-        if (applicationService.applicationData.mode === Mode.STANDARD) {
+        applicationService.applicationDataModel.startDateTime = timeUtils.getCurrentDate();
+        if (applicationService.applicationDataModel.mode === ModeEnum.STANDARD) {
             logService.startLogProgress();
         }
         const isLimitExceeded = await scanService.run();
         let status, color = null;
         if (isLimitExceeded) {
-            status = Status.LIMIT_EXCEEDED;
-            color = Color.RED;
+            status = StatusEnum.LIMIT_EXCEEDED;
+            color = ColorEnum.RED;
         }
         else {
-            status = Status.FINISH;
-            color = Color.GREEN;
+            status = StatusEnum.FINISH;
+            color = ColorEnum.GREEN;
         }
         await this.exit(status, color);
     }
 
     async sleep() {
-        await globalUtils.sleep(countLimitService.countLimitData.millisecondsEndDelayCount);
+        await globalUtils.sleep(countLimitService.countLimitDataModel.millisecondsEndDelayCount);
     }
 
     // Let the user confirm all the IMPORTANT settings before the process starts.
     async confirm() {
         if (!await confirmationService.confirm(settings)) {
-            await this.exit(Status.ABORT_BY_THE_USER, Color.RED);
+            await this.exit(StatusEnum.ABORT_BY_THE_USER, ColorEnum.RED);
         }
     }
 
     updateStatus(text, status) {
         logUtils.logMagentaStatus(text);
-        if (applicationService.applicationData) {
-            applicationService.applicationData.status = status;
+        if (applicationService.applicationDataModel) {
+            applicationService.applicationDataModel.status = status;
         }
     }
 
     async exit(status, color) {
-        if (applicationService.applicationData) {
-            applicationService.applicationData.status = status;
+        if (applicationService.applicationDataModel) {
+            applicationService.applicationDataModel.status = status;
             await this.sleep();
             logService.close();
         }

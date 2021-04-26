@@ -1,30 +1,31 @@
 const enumUtils = require('../enum.utils');
 
-const Method = enumUtils.createEnum([
+const MethodEnum = enumUtils.createEnum([
     ['NAME', 'NAME'],
     ['CONTENT', 'CONTENT']
 ]);
 
-const Mode = enumUtils.createEnum([
+const ModeEnum = enumUtils.createEnum([
     ['STANDARD', 'STANDARD'],
     ['SILENT', 'SILENT']
 ]);
 
-const ScriptType = enumUtils.createEnum([
+const ScriptTypeEnum = enumUtils.createEnum([
+    ['INITIATE', 'initiate'],
     ['BACKUP', 'backup'],
     ['SCAN', 'scan'],
     ['TEST', 'test']
 ]);
 
-const Status = enumUtils.createEnum([
+const StatusEnum = enumUtils.createEnum([
     ['INITIATE', 'INITIATE'],
+    ['ABORT_BY_THE_USER', 'ABORT BY THE USER'],
     ['VALIDATE', 'VALIDATE'],
     ['DOWNLOAD', 'DOWNLOAD'],
     ['IMPLEMENT', 'IMPLEMENT'],
     ['SCAN', 'SCAN'],
     ['LIMIT_EXCEEDED', 'LIMIT EXCEEDED'],
-    ['ABORT_BY_THE_USER', 'ABORT BY THE USER'],
     ['FINISH', 'FINISH']
 ]);
 
-module.exports = { Method, Mode, ScriptType, Status };
+module.exports = { MethodEnum, ModeEnum, ScriptTypeEnum, StatusEnum };

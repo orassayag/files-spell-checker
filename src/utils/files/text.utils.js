@@ -146,13 +146,6 @@ class TextUtils {
         return `${text}\r\n`;
     }
 
-    removeLastCharacter(text) {
-        if (!text) {
-            return '';
-        }
-        return text.substring(0, text.length - 1);
-    }
-
     capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     }
