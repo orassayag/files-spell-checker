@@ -13,7 +13,7 @@ const settings = {
     MODE: ModeEnum.STANDARD,
     // Determine the absolute path to scan the files (and directories in case of NAME
     // method) in order to scan them. For example: C:\\Or\\Web\\puppeteer-example
-    SCAN_PATH: 'C:\\',
+    SCAN_PATH: 'C:\\test',
 
     // ===LOG=== //
     // Determine if to log results for each email to a TXT file.
