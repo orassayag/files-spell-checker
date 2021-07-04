@@ -52,13 +52,16 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "babel-eslint": "^10.1.0",
     "byline": "^5.0.0",
     "dictionary-en": "^3.1.0",
-    "eslint": "^7.27.0",
     "fs-extra": "^10.0.0",
     "is-reachable": "^5.0.0",
     "log-update": "^4.0.0",
     "nspell": "^2.1.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.30.0",
+    "@types/node": "^16.0.0"
   }
 }
