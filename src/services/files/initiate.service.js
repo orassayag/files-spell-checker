@@ -161,6 +161,9 @@ class InitiateService {
 	}
 
 	validateSpecial() {
+		if (this.scriptType === ScriptTypeEnum.INITIATE) {
+			return;
+		}
 		const { SCAN_PATH, VALIDATION_CONNECTION_LINK } = settings;
 		// ===GENERAL=== //
 		this.validateDirectory(SCAN_PATH);
