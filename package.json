@@ -55,13 +55,13 @@
     "byline": "^5.0.0",
     "dictionary-en": "^3.1.0",
     "fs-extra": "^10.0.0",
-    "is-reachable": "^5.1.0",
+    "is-reachable": "^5.1.1",
     "log-update": "^4.0.0",
     "nspell": "^2.1.5"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.15.8",
-    "eslint": "^8.0.1",
-    "@types/node": "^16.11.1"
+    "@babel/eslint-parser": "^7.16.5",
+    "eslint": "^8.6.0",
+    "@types/node": "^17.0.5"
   }
 }
