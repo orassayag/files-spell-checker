@@ -54,14 +54,14 @@
   "dependencies": {
     "byline": "^5.0.0",
     "dictionary-en": "^3.1.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.0.1",
     "is-reachable": "^5.1.1",
     "log-update": "^4.0.0",
     "nspell": "^2.1.5"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
-    "@types/node": "^17.0.18",
-    "eslint": "^8.9.0"
+    "@types/node": "^17.0.21",
+    "eslint": "^8.10.0"
   }
 }
