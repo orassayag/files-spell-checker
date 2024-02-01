@@ -60,8 +60,8 @@
     "nspell": "^2.1.5"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.23.3",
-    "@types/node": "^20.11.5",
+    "@babel/eslint-parser": "^7.23.10",
+    "@types/node": "^20.11.16",
     "eslint": "^8.56.0"
   }
 }
