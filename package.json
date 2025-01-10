@@ -60,6 +60,6 @@
     "nspell": "^2.1.5"
   },
   "devDependencies": {
-    "eslint": "^9.17.0"
+    "eslint": "^9.18.0"
   }
 }
