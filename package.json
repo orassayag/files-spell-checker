@@ -54,7 +54,7 @@
   "dependencies": {
     "byline": "^5.0.0",
     "dictionary-en": "^4.0.0",
-    "fs-extra": "^11.3.1",
+    "fs-extra": "^11.3.2",
     "is-reachable": "^6.0.0",
     "log-update": "^4.0.0",
     "nspell": "^2.1.5"
