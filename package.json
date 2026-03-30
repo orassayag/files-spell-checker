@@ -2,21 +2,29 @@
   "name": "files-spell-checker",
   "version": "1.0.0",
   "private": false,
-  "description": "A Node.js application to scan file names, directory paths, and file contents to alert for spell mistakes within the names via log.",
+  "description": "A Node.js application to scan file names, directory paths, and file contents for spelling mistakes with comprehensive reporting and dictionary support.",
   "repository": {
     "type": "git",
     "url": "git://github.com/orassayag/files-spell-checker.git"
   },
   "keywords": [
-    "scan",
-    "paths",
-    "files",
-    "directories",
-    "cspell",
+    "spell-checker",
+    "spellcheck",
+    "spelling",
     "nspell",
-    "spell-check"
+    "dictionary",
+    "file-scanner",
+    "code-quality",
+    "linter",
+    "naming-conventions",
+    "project-scanner",
+    "misspelling",
+    "spell-check",
+    "spell-checking",
+    "file-validation",
+    "directory-scanner"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "author": "Or Assayag <orassayag@gmail.com>",
   "contributors": [
     {
@@ -60,6 +68,6 @@
     "nspell": "^2.1.5"
   },
   "devDependencies": {
-    "eslint": "^10.1.0"
+    "eslint": "^10.0.2"
   }
 }
