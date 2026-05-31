@@ -10,6 +10,14 @@ const spellCheckService = require('./files/spellCheck.service');
 const validationService = require('./files/validation.service');
 
 module.exports = {
-    applicationService, confirmationService, countLimitService, itemService, logService,
-    nSpellService, pathService, scanService, spellCheckService, validationService
+  applicationService,
+  confirmationService,
+  countLimitService,
+  itemService,
+  logService,
+  nSpellService,
+  pathService,
+  scanService,
+  spellCheckService,
+  validationService,
 };

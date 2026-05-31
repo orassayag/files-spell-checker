@@ -9,6 +9,7 @@ Everyone is welcome to contribute to this project. Contributing doesn't just mea
 ### Reporting Issues
 
 If you find a bug or have a feature request:
+
 1. Check if the issue already exists in the [GitHub Issues](https://github.com/orassayag/files-spell-checker/issues)
 2. If not, create a new issue with:
    - Clear title and description
@@ -32,11 +33,13 @@ If you find a bug or have a feature request:
 ### Code Style Guidelines
 
 This project uses:
+
 - **JavaScript (Node.js)** with ES6+ features
 - **ESLint** for code quality
 - Service-oriented architecture pattern
 
 Before submitting:
+
 ```bash
 # Check for linting errors
 npm run lint
@@ -57,6 +60,7 @@ npm start
 ### Adding New Features
 
 When adding new features:
+
 1. Add configuration options in `src/settings/settings.js`
 2. Create service logic in `src/services/files/`
 3. Update models in `src/core/models/` if needed
@@ -67,6 +71,7 @@ When adding new features:
 ### Testing Guidelines
 
 When testing your changes:
+
 1. Test both NAME and CONTENT methods
 2. Test with various file types and extensions
 3. Test with different path configurations
@@ -78,6 +83,7 @@ When testing your changes:
 ### Adding Dictionary Support
 
 To add support for new dictionaries:
+
 1. Add the dictionary URL to `src/configurations/files/dictionariesURLs.configuration.js`
 2. Ensure the dictionary format is compatible with nspell
 3. Test with words from the new dictionary
@@ -86,6 +92,7 @@ To add support for new dictionaries:
 ### Ignore Configuration
 
 To help others configure ignore lists:
+
 - Add common technical terms to `src/configurations/files/ignoreWords.configuration.js`
 - Document patterns in `src/configurations/files/ignorePaths.configuration.js`
 - Explain in comments why certain patterns are ignored
@@ -94,9 +101,9 @@ To help others configure ignore lists:
 
 Please feel free to contact me with any question, comment, pull-request, issue, or any other thing you have in mind.
 
-* Or Assayag <orassayag@gmail.com>
-* GitHub: https://github.com/orassayag
-* StackOverflow: https://stackoverflow.com/users/4442606/or-assayag?tab=profile
-* LinkedIn: https://linkedin.com/in/orassayag
+- Or Assayag <orassayag@gmail.com>
+- GitHub: https://github.com/orassayag
+- StackOverflow: https://stackoverflow.com/users/4442606/or-assayag?tab=profile
+- LinkedIn: https://linkedin.com/in/orassayag
 
 Thank you for contributing! 🙏

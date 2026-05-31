@@ -1,49 +1,48 @@
 const path = require('path');
 
 class PathUtils {
+  constructor() {}
 
-    constructor() { }
-
-    getJoinPath(data) {
-        const { targetPath, targetName } = data;
-        // Check if the targetPath parameter was received.
-        if (!targetPath) {
-            throw new Error(`targetPath not received: ${targetPath} (1000024)`);
-        }
-        // Check if the fileName parameter was received.
-        if (!targetName) {
-            throw new Error(`targetName not received: ${targetName} (1000025)`);
-        }
-        return path.join(targetPath, targetName);
+  getJoinPath(data) {
+    const { targetPath, targetName } = data;
+    // Check if the targetPath parameter was received.
+    if (!targetPath) {
+      throw new Error(`targetPath not received: ${targetPath} (1000024)`);
     }
-
-    getBasename(source) {
-        return path.basename(source);
+    // Check if the fileName parameter was received.
+    if (!targetName) {
+      throw new Error(`targetName not received: ${targetName} (1000025)`);
     }
+    return path.join(targetPath, targetName);
+  }
 
-    getFileName(filePath) {
-        return path.parse(filePath).name;
-    }
+  getBasename(source) {
+    return path.basename(source);
+  }
 
-    getFullFileName(filePath) {
-        return path.parse(filePath).base;
-    }
+  getFileName(filePath) {
+    return path.parse(filePath).name;
+  }
 
-    getDirectoryPath(filePath) {
-        return path.dirname(filePath);
-    }
+  getFullFileName(filePath) {
+    return path.parse(filePath).base;
+  }
 
-    getDirectoryName(directoryPath) {
-        return directoryPath.split('\\').pop();
-    }
+  getDirectoryPath(filePath) {
+    return path.dirname(filePath);
+  }
 
-    resolve(directory, direntName) {
-        return path.resolve(directory, direntName);
-    }
+  getDirectoryName(directoryPath) {
+    return directoryPath.split('\\').pop();
+  }
 
-    getExtname(filePath) {
-        return path.extname(filePath).slice(1);
-    }
+  resolve(directory, direntName) {
+    return path.resolve(directory, direntName);
+  }
+
+  getExtname(filePath) {
+    return path.extname(filePath).slice(1);
+  }
 }
 
 module.exports = new PathUtils();

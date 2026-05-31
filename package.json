@@ -2,11 +2,7 @@
   "name": "files-spell-checker",
   "version": "1.0.0",
   "private": false,
-  "description": "A Node.js application to scan file names, directory paths, and file contents for spelling mistakes with comprehensive reporting and dictionary support.",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/orassayag/files-spell-checker.git"
-  },
+  "description": "A Node.js application that scans file names, directory paths, and file contents for spelling mistakes and generates detailed reports. Built to help developers maintain consistent, error-free naming conventions across projects, using dictionaries from cspell-dicts for accurate spell checking",
   "keywords": [
     "spell-checker",
     "spellcheck",
@@ -24,8 +20,24 @@
     "file-validation",
     "directory-scanner"
   ],
+  "homepage": "https://github.com/orassayag/files-spell-checker#readme",
+  "bugs": {
+    "url": "https://github.com/orassayag/files-spell-checker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/orassayag/files-spell-checker.git"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/orassayag"
+  },
   "license": "MIT",
-  "author": "Or Assayag <orassayag@gmail.com>",
+  "author": {
+    "name": "Or Assayag",
+    "email": "orassayag@gmail.com",
+    "url": "https://github.com/orassayag"
+  },
   "contributors": [
     {
       "name": "Or Assayag",
@@ -33,24 +45,37 @@
       "url": "https://github.com/orassayag"
     }
   ],
+  "type": "commonjs",
   "main": "src/scripts/scan.script.js",
   "files": [
+    ".github",
+    ".vscode",
+    "dictionaries",
+    "dist",
+    "misc",
     "src",
     ".eslintignore",
     ".eslintrc",
     ".gitignore",
     ".jsbeautifyrc",
     ".npmignore",
+    ".prettierrc",
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md",
+    "CONTRIBUTING.md",
     "INSTRUCTIONS.md",
+    "knip.json",
+    "LICENSE",
     "package-lock.json",
     "package.json",
-    "README.md"
+    "README.md",
+    "SECURITY.md"
   ],
   "scripts": {
     "backup": "node src/scripts/backup.script.js",
+    "postinstall": "node src/scripts/initiate.script.js",
     "sand": "node src/tests/sandbox.test.js",
     "start": "node src/scripts/scan.script.js",
-    "postinstall": "node src/scripts/initiate.script.js",
     "stop": "taskkill -f -im node.exe"
   },
   "browserslist": [

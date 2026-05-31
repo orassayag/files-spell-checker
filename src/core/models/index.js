@@ -9,6 +9,13 @@ const LogDataModel = require('./files/LogData.model');
 const PathDataModel = require('./files/PathData.model');
 
 module.exports = {
-    ApplicationDataModel, BackupDataModel, BackupDirectoryModel, CheckResultModel, CheckResultsModel, CountLimitDataModel,
-    ItemDataModel, LogDataModel, PathDataModel
+  ApplicationDataModel,
+  BackupDataModel,
+  BackupDirectoryModel,
+  CheckResultModel,
+  CheckResultsModel,
+  CountLimitDataModel,
+  ItemDataModel,
+  LogDataModel,
+  PathDataModel,
 };

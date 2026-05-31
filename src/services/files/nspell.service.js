@@ -1,72 +1,85 @@
 const dictionary = require('dictionary-en');
 const nspell = require('nspell');
 const { StatusEnum } = require('../../core/enums');
-const { baseURL, dictionariesURLs, ignoreWords } = require('../../configurations');
+const {
+  baseURL,
+  dictionariesURLs,
+  ignoreWords,
+} = require('../../configurations');
 const applicationService = require('./application.service');
-const { fileUtils, httpsUtils, logUtils, pathUtils, validationUtils } = require('../../utils');
+const {
+  fileUtils,
+  httpsUtils,
+  logUtils,
+  pathUtils,
+  validationUtils,
+} = require('../../utils');
 
 class NSpellService {
+  constructor() {
+    this.spell = null;
+  }
 
-    constructor() {
-        this.spell = null;
+  async initiate(settings) {
+    this.updateStatus('DOWNLOAD DICTIONARIES', StatusEnum.DOWNLOAD);
+    for (let i = 0; i < dictionariesURLs.length; i++) {
+      await this.downloadFile(dictionariesURLs[i], settings.DICTIONARIES_PATH);
     }
-
-    async initiate(settings) {
-        this.updateStatus('DOWNLOAD DICTIONARIES', StatusEnum.DOWNLOAD);
+    this.updateStatus('IMPLEMENT DICTIONARIES', StatusEnum.IMPLEMENT);
+    this.spell = await new Promise((resolve, reject) => {
+      if (reject) {
+      }
+      dictionary(async (err, dict) => {
+        if (err) {
+        }
+        const spell = nspell(dict);
         for (let i = 0; i < dictionariesURLs.length; i++) {
-            await this.downloadFile(dictionariesURLs[i], settings.DICTIONARIES_PATH);
+          const words = await this.getDictionary(
+            this.getFilePath(dictionariesURLs[i], settings.DICTIONARIES_PATH)
+          );
+          for (let y = 0; y < words.length; y++) {
+            const word = words[y];
+            if (!word) {
+              continue;
+            }
+            spell.add(word);
+          }
         }
-        this.updateStatus('IMPLEMENT DICTIONARIES', StatusEnum.IMPLEMENT);
-        this.spell = await new Promise((resolve, reject) => {
-            if (reject) { }
-            dictionary(async (err, dict) => {
-                if (err) { }
-                const spell = nspell(dict);
-                for (let i = 0; i < dictionariesURLs.length; i++) {
-                    const words = await this.getDictionary(this.getFilePath(dictionariesURLs[i], settings.DICTIONARIES_PATH));
-                    for (let y = 0; y < words.length; y++) {
-                        const word = words[y];
-                        if (!word) {
-                            continue;
-                        }
-                        spell.add(word);
-                    }
-                }
-                if (validationUtils.isExists(ignoreWords)) {
-                    for (let i = 0; i < ignoreWords.length; i++) {
-                        spell.add(ignoreWords[i]);
-                    }
-                }
-                resolve(spell);
-            });
-        });
-    }
-
-    async downloadFile(uri, dictionariesPath) {
-        const fileFullName = `${uri}.txt`;
-        const filePath = this.getFilePath(uri, dictionariesPath);
-        if (!await fileUtils.isPathExists(filePath)) {
-            await httpsUtils.downloadFile(`${baseURL}${fileFullName}`, filePath);
+        if (validationUtils.isExists(ignoreWords)) {
+          for (let i = 0; i < ignoreWords.length; i++) {
+            spell.add(ignoreWords[i]);
+          }
         }
-    }
+        resolve(spell);
+      });
+    });
+  }
 
-    getFilePath(uri, dictionariesPath) {
-        const fileFullName = `${uri}.txt`;
-        const fileName = pathUtils.getFileName(fileFullName);
-        return `${dictionariesPath}\\${fileName}.txt`;
+  async downloadFile(uri, dictionariesPath) {
+    const fileFullName = `${uri}.txt`;
+    const filePath = this.getFilePath(uri, dictionariesPath);
+    if (!(await fileUtils.isPathExists(filePath))) {
+      await httpsUtils.downloadFile(`${baseURL}${fileFullName}`, filePath);
     }
+  }
 
-    async getDictionary(filePath) {
-        const words = await fileUtils.read(filePath);
-        return words.split('\n');
-    }
+  getFilePath(uri, dictionariesPath) {
+    const fileFullName = `${uri}.txt`;
+    const fileName = pathUtils.getFileName(fileFullName);
+    return `${dictionariesPath}\\${fileName}.txt`;
+  }
 
-    updateStatus(text, status) {
-        logUtils.logMagentaStatus(text);
-        if (applicationService.applicationDataModel) {
-            applicationService.applicationDataModel.status = status;
-        }
+  async getDictionary(filePath) {
+    const words = await fileUtils.read(filePath);
+    return words.split('\n');
+  }
+
+  updateStatus(text, status) {
+    logUtils.logMagentaStatus(text);
+    if (applicationService.applicationDataModel) {
+      applicationService.applicationDataModel.status = status;
     }
+  }
 }
 
 module.exports = new NSpellService();
